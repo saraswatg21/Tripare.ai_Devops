@@ -1,0 +1,33 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Backup files
+*.dump
+backups/
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+
+# Secrets
+*.pem
+*.key
+credentials
+credentials.*

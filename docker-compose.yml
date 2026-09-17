@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tripare-postgres
+    environment:
+      POSTGRES_USER: tripare
+      POSTGRES_PASSWORD: tripare
+      POSTGRES_DB: tripare
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro
+      - ./db/seeds:/seeds:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tripare -d tripare"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  pgdata:

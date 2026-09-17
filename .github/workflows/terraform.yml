@@ -1,0 +1,12 @@
+name: Terraform checks
+on: [pull_request]
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform -chdir=infra/envs/dev fmt -check -recursive
+      - run: terraform -chdir=infra/envs/dev init -backend=false
+      - run: terraform -chdir=infra/envs/dev validate
+      - run: terraform -chdir=infra/envs/dev plan -refresh=false -input=false -no-color
